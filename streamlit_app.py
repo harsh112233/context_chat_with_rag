@@ -7,12 +7,12 @@ from llama_index.core.memory import ChatMemoryBuffer
 # Load environment variables
 OPENAI_API_KEY = st.secrets["OPENAI_API_KEY"]
 if not OPENAI_API_KEY:
-    st.error("OPENAI_API_KEY not found in environment variables. Please set it in your .env file.")
+    st.error("OPENAI_API_KEY not found in environment variables. Please set it in your secrets.toml file.")
     st.stop()
 
 # App header and description
 st.header("Context remembering AI chat with RAG")
-st.write("Upload a document or image and query the knowledge it contains. This app uses the document content and LLM-generated information to answer your queries. Supported file types: any readable text file/CSV/image.")
+st.write("Upload a document and query the knowledge it contains. This app uses the document content and LLM-generated information to answer your queries. Supported file types: any readable text file.")
 
 # Initialize session state
 if "chat_engine" not in st.session_state:
@@ -72,8 +72,9 @@ def init_chat_engine():
             chat_mode="context",
             memory=memory,
             system_prompt=(
-                "You are a chatbot, able to have normal interactions, as well as talk"
-                " about an essay discussing Paul Graham's life."
+                "You are a helpful and knowledgeable support agent. "
+                "Your goal is to assist users with their inquiries, "
+                "provide accurate information, and resolve issues in a friendly and professional manner."
             ),
         )
         return chat_engine
@@ -127,7 +128,7 @@ if st.session_state["chat_engine"]:
 # Instructions
 st.sidebar.markdown("""
 ### Instructions
-1. Upload any document/file/image using the file uploader.
+1. Upload any document/file using the file uploader.
 2. Click 'Load Documents and Initialize Chat' to start.
 3. Type your question and press Enter.
 4. Type 'exit' to end the chat.
