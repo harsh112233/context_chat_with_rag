@@ -12,7 +12,7 @@ if not OPENAI_API_KEY:
 
 # App header and description
 st.header("Context remembering AI chat with RAG")
-st.write("Upload a document and query the knowledge it contains. This app uses the document content and LLM-generated information to answer your queries. Supported file types: any readable text file.")
+st.write("Upload a PDF document and query the knowledge it contains. This app uses the document content and LLM-generated information to answer your queries. Supported file types: PDF file.")
 
 # Initialize session state
 if "chat_engine" not in st.session_state:
@@ -128,7 +128,7 @@ if st.session_state["chat_engine"]:
 # Instructions
 st.sidebar.markdown("""
 ### Instructions
-1. Upload any document/file using the file uploader.
+1. Upload any PDF file using the file uploader.
 2. Click 'Load Documents and Initialize Chat' to start.
 3. Type your question and press Enter.
 4. Type 'exit' to end the chat.
